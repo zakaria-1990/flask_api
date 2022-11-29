@@ -1,11 +1,12 @@
 from flask import abort, make_response
 from config import db
-from models import Person, person_schema, people_schema
+from models import Person, person_schema, people_schema, PersonSchema
 
 
 def read_all():
-    people = Person.querry.all()
-    return people_schema.dump(people)
+    people = Person.query.all()
+    person_schema = PersonSchema(many=True)
+    return person_schema.dump(people)
 
 
 def create(person):
